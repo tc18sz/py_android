@@ -1,0 +1,15 @@
+parameterized==0.7.0
+PyMySQL==0.9.3
+selenium==3.141.0
+pytest==3.7.1
+allure-pytest==2.5.2
+allure-python-commons==2.5.2
+Appium-Python-Client==0.46
+opencv-python==4.1.2.30
+numpy==1.18.0
+scikit_image==0.16.2
+pywin32==227
+pyperclip==1.7.0
+PyUserInput
+PyGetWindow==0.0.8
+
