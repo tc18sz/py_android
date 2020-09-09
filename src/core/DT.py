@@ -395,7 +395,7 @@ class DT(object):
                 elif (way == "NAME"):
                     element = driver.find_element(by=By.NAME, value=value)
                 elif (way == "TEXT"):
-                    element = driver.find_element(by=By.LINK_TEXT, value=value)
+                    element = driver.find_element(by=By.TEXT, value=value)
                 elif (way == "CLASS_NAME"):
                     value1 = value.split(":")
                     viewList = driver.find_elements(by=By.CLASS_NAME, value=value1[0])

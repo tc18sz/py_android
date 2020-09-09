@@ -29,6 +29,8 @@ class TestFeasiblePathLength_11994(BaseTest):
         # 1. 首页面 --- click ---> loginname----->login 
         #click -->loginName
         dt.sleep(2)
-        dt.click(self.elements.vd203b1_by, self.elements.vd203b1)
-        dt.assertDtEquals("TEXT","首页","首页")
+        #dt.click(self.elements.vd203b1_by, self.elements.vd203b1)
+        dt.findView("TEXT","首页")
+        #dt.assertDtEquals("TEXT","首页","首页")
         dt.refreshStep()
+
