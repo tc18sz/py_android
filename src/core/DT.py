@@ -432,6 +432,9 @@ class DT(object):
                 return WebDriverWait(self.driver, 30).until(lambda driver: driver.find_element(by=By.ID, value=value))
             elif (way == "NAME"):
                 return driver.find_element_by_android_uiautomator('new UiSelector().text(\"' + value + '\")')
+            elif (way == "TEXT"):
+                return WebDriverWait(self.driver, 30).until(
+                    lambda driver: driver.find_element(by=By.TEXT, value=value))
             elif (way == "CLASS_NAME"):
                 value1 = value.split(":")
                 viewList = WebDriverWait(self.driver, 30).until(
@@ -1971,3 +1974,10 @@ class DT(object):
                     raise AssertionError("断言元素超时")
         except Exception as e:
             raise e
+
+    def ut_assertEqual(self):
+        try:
+            expectResult = self.driver.find_element
+            return 1
+        except Exception as e:
+                raise e

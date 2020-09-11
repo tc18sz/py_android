@@ -106,8 +106,86 @@ class BaseTest():
                     # self.desired_caps['app'] = 'E:/autotestingPro/app/UCliulanqi_701.apk'   # 指向.apk文件，如果设置appPackage和appActivity，那么这项会被忽略
                     self.desired_caps['appPackage'] = conf.get("SectionA", "appPackage")  # APK包名
                     self.desired_caps['appActivity'] = conf.get("SectionA", "appActivity")  # 被测程序启动时的Activity
+                    #self.desired_caps['unicodeKeyboard'] = True  # 是否支持unicode的键盘。如果需要输入中文，要设置为“true”
+                    #self.desired_caps['resetKeyboard'] = True  # 是否在测试结束后将键盘重轩为系统默认的输入法。
+                    self.desired_caps['newCommandTimeout'] = '120'  # Appium服务器待appium客户端发送新消息的时间。默认为60秒
+                    self.desired_caps['deviceName'] = conf.get("SectionA", "deviceName")  # 手机ID
+                    self.desired_caps['noReset'] = True  # true:不重新安装APP，false:重新安装app
+                    self.desired_caps['sessionOverride'] = True  # true:覆盖session，false:不覆盖session
+                    self.driver = webdriver.Remote("http://127.0.0.1:4723/wd/hub", self.desired_caps)
+                    self.driver.implicitly_wait(2)
+                    self.dt = DT(self.driver, self)
+                    return self.driver, self.dt
+                elif (conf.get("SectionA", "apptype") == '2'):
+                    self.desired_caps = {}
+                    self.desired_caps['platformName'] = 'Android'  # 平台
+                    self.desired_caps['platformVersion'] = conf.get("SectionA", "platformVersion")  # 系统版本
+                    # self.desired_caps['app'] = 'E:/autotestingPro/app/UCliulanqi_701.apk'   # 指向.apk文件，如果设置appPackage和appActivity，那么这项会被忽略
+                    self.desired_caps['appPackage'] = "com.tencent.mm"  # APK包名
+                    self.desired_caps['appActivity'] = "ui.LauncherUI"  # 被测程序启动时的Activity
                     self.desired_caps['unicodeKeyboard'] = True  # 是否支持unicode的键盘。如果需要输入中文，要设置为“true”
                     self.desired_caps['resetKeyboard'] = True  # 是否在测试结束后将键盘重轩为系统默认的输入法。
+                    self.desired_caps['newCommandTimeout'] = '120'  # Appium服务器待appium客户端发送新消息的时间。默认为60秒
+                    self.desired_caps['deviceName'] = conf.get("SectionA", "deviceName")  # 手机ID
+                    self.desired_caps['noReset'] = True  # true:不重新安装APP，false:重新安装app
+                    self.desired_caps['sessionOverride'] = True  # true:覆盖session，false:不覆盖session
+                    self.desired_caps['chromeOptions'] = {'androidProcess': 'com.tencent.mm:tools'}  # 关键所在
+                    # self.desired_caps['AUTOMATION_NAME'] = 'uiautomator2'
+                    self.driver = webdriver.Remote("http://127.0.0.1:4723/wd/hub", self.desired_caps)
+                    self.driver.implicitly_wait(2)
+                    self.dt = DT(self.driver, self)
+                    return self.driver, self.dt
+            except Exception as e:
+                raise e
+        else:
+
+            self.desired_caps = {}
+            self.desired_caps['platformName'] = 'Android'  # 平台
+            self.desired_caps['platformVersion'] = conf.get("SectionA", "platformVersion")  # 系统版本
+            # self.desired_caps['app'] = 'E:/autotestingPro/app/UCliulanqi_701.apk'   # 指向.apk文件，如果设置appPackage和appActivity，那么这项会被忽略
+            self.desired_caps['appPackage'] = os.environ.get('appPackage')  # APK包名
+            if os.environ.get('appActivity') == "":
+                self.desired_caps['appActivity'] = "com.google.android.apps.chrome.Main" # 被测程序启动时的Activity
+            else:
+                self.desired_caps['appActivity'] = os.environ.get("appActivity")
+            #self.desired_caps['unicodeKeyboard'] = True  # 是否支持unicode的键盘。如果需要输入中文，要设置为“true”
+            #self.desired_caps['resetKeyboard'] = True  # 是否在测试结束后将键盘重轩为系统默认的输入法。
+            self.desired_caps['newCommandTimeout'] = '120'  # Appium服务器待appium客户端发送新消息的时间。默认为60秒
+            self.desired_caps['deviceName'] = os.environ.get('serial')  # 手机ID
+            self.desired_caps['noReset'] = True  # true:不重新安装APP，false:重新安装app
+            self.desired_caps['sessionOverride'] = True  # true:覆盖session，false:不覆盖session
+            self.desired_caps['app'] = os.environ.get('appPath')
+            self.desired_caps['androidInstallTimeout'] = 180000
+            self.desired_caps['skipDeviceInitialization'] = True
+            self.desired_caps['skipServerInstallation'] = True
+            self.driver = webdriver.Remote("http://127.0.0.1:" + os.environ.get('appiumPort') + "/wd/hub",
+                                           self.desired_caps)
+            self.driver.implicitly_wait(2)
+            self.dt = DT(self.driver, self)
+            return self.driver, self.dt
+
+    def setUp_bak(self):
+        result = self.getPhone()
+        currentPath = os.path.dirname(os.path.abspath(__file__))
+        root_path1 = os.path.abspath(os.path.join(currentPath, "../.."))
+        config_data = os.path.join(root_path1, 'config.properties')
+        print(config_data)
+        conf = ConfigParser()
+        conf.read(config_data)
+        with allure.step("设备信息"):
+            allure.attach(result)
+        if os.environ.get('appPath') == None:
+            try:
+
+                if (conf.get("SectionA", "apptype") == '1'):
+                    self.desired_caps = {}
+                    self.desired_caps['platformName'] = 'Android'  # 平台
+                    self.desired_caps['platformVersion'] = conf.get("SectionA", "platformVersion")  # 系统版本
+                    # self.desired_caps['app'] = 'E:/autotestingPro/app/UCliulanqi_701.apk'   # 指向.apk文件，如果设置appPackage和appActivity，那么这项会被忽略
+                    self.desired_caps['appPackage'] = conf.get("SectionA", "appPackage")  # APK包名
+                    self.desired_caps['appActivity'] = conf.get("SectionA", "appActivity")  # 被测程序启动时的Activity
+                    #self.desired_caps['unicodeKeyboard'] = True  # 是否支持unicode的键盘。如果需要输入中文，要设置为“true”
+                    #self.desired_caps['resetKeyboard'] = True  # 是否在测试结束后将键盘重轩为系统默认的输入法。
                     self.desired_caps['newCommandTimeout'] = '120'  # Appium服务器待appium客户端发送新消息的时间。默认为60秒
                     self.desired_caps['deviceName'] = conf.get("SectionA", "deviceName")  # 手机ID
                     self.desired_caps['noReset'] = True  # true:不重新安装APP，false:重新安装app

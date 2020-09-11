@@ -8,9 +8,9 @@ import pytest
 from src.core.getImage import getImage
 from src.utils.loggers import JFMlogging
 
-class TestFeasiblePathLength_11994(BaseTest):
+class TestFeasiblePathLength_11995(BaseTest):
     global listInfor
-    listInfor = {"testCase2":["login"],"testCase3":["wealth"]}
+    listInfor = {"testCase2_2":["login"],"testCase3_2":["wealth"]}
     def setup_method(self):
         BaseTest.new(self, listInfor)
         global driver,dt
@@ -25,7 +25,7 @@ class TestFeasiblePathLength_11994(BaseTest):
     @allure.feature("")
     @allure.description("")
     @getImage
-    def testCase2(self): 
+    def testCase2_2(self):
         # 1. 首页面 --- click ---> loginname----->login 
         #click -->loginName
         # dt.sleep(2)
@@ -34,8 +34,8 @@ class TestFeasiblePathLength_11994(BaseTest):
         # dt.sleep(2)
         # dt.click(self.elements.benefit_by, self.elements.benefit_location)
         #
-        # dt.sleep(2)
-        # dt.click(self.elements.mytab_by, self.elements.mytab_location)
+        dt.sleep(2)
+        dt.click(self.elements.mytab_by, self.elements.mytab_location)
         #
         # dt.sleep(2)
         # dt.click(self.elements.homepage_by, self.elements.homepage_location)
@@ -46,7 +46,7 @@ class TestFeasiblePathLength_11994(BaseTest):
         # dt.findView("TEXT", "优惠")
         # dt.findView("TEXT", "我的")
 
-        dt.findView("TEXT", "扫一扫")
+        #dt.findView("TEXT", "扫一扫")
 
         dt.findViewForass("TEXT","首页")
         dt.refreshStep()
@@ -55,7 +55,7 @@ class TestFeasiblePathLength_11994(BaseTest):
     @allure.feature("")
     @allure.description("")
     @getImage
-    def testCase3(self):
+    def testCase3_2(self):
         # 1. 首页面 --- click ---> loginname----->login
         #click -->wealth
         dt.sleep(2)
