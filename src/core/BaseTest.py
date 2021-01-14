@@ -7,6 +7,7 @@ import os
 from src.field.Elements import Elements
 from src.utils.loggers import JFMlogging
 from src.core.DT import DT
+from src.utils.test_cpu import Controller
 
 
 class BaseTest():

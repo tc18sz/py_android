@@ -7,6 +7,7 @@ import allure
 import pytest
 from src.core.getImage import getImage
 from src.utils.loggers import JFMlogging
+from src.utils.test_cpu import Controller
 
 class TestFeasiblePathLength_11994(BaseTest):
     global listInfor
@@ -15,6 +16,11 @@ class TestFeasiblePathLength_11994(BaseTest):
         BaseTest.new(self, listInfor)
         global driver,dt
         driver, dt = BaseTest.setUp(self)
+
+        #debug CPU data
+        con = Controller.__new__(object)
+        con.__init__(self,object.count)
+
         self.logger.info("开始运行测试")
     def teardown_method(self):
         BaseTest.beforeEnd(self)
